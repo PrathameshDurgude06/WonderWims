@@ -3,12 +3,14 @@ package com.tour.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -39,9 +41,15 @@ public class Tour extends BaseEntity{
 	@Column(name = "start_date")
 	private LocalDate startDate;
 	
-	@Column(name = "end_date")
-	private LocalDate endDate;
+	private double price;
 	
-	private Double price;
+	@ElementCollection
+	@CollectionTable(name = "tour_dest", joinColumns = @JoinColumn(name="tour_id"))
+	@Column(name="dest_id")
+	private List<Destination> destinations;
+	
+//	@OneToMany
+//	@JoinColumn(name = "dest_id")
+//	private Destination destination;
 
 }

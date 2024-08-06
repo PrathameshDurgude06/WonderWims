@@ -1,5 +1,7 @@
 package com.tour.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Booking extends BaseEntity {
+public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "booking_id")
@@ -34,7 +36,11 @@ public class Booking extends BaseEntity {
 	@Column(length = 10)
 	private Status status;
 	
-	private Double amount;
+	@Column(name = "booking_date")
+	private LocalDate bookingDate;
+	
+	@Column(name = "total_cost")
+	private double totalCost;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id",nullable =false )
