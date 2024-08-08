@@ -1,13 +1,13 @@
 package com.tour.entities;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,7 +32,9 @@ public class Review {
 	 
 	 private String comment;
 	 
-	 private Date dateTime;
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name="commenter_id",nullable = false)
+	 private User commenter;
 
 	 @OneToOne
 	 @JoinColumn(name = "booking_id")
