@@ -47,7 +47,7 @@ public class Tour extends BaseEntity{
 	@CollectionTable(name = "tour_dest", joinColumns = @JoinColumn(name="tour_id"))
 	@Column(name="dest_id")
 	private List<Destination> destinations;
-	
+
 //	@OneToMany
 //	@JoinColumn(name = "dest_id")
 //	private Destination destination;
