@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.tour.custom_exception_handler.ApiException;
+import com.tour.custom_exception.ApiException;
 import com.tour.dto.Signup;
 import com.tour.entities.User;
 import com.tour.repository.UserRepository;
@@ -12,7 +12,7 @@ import com.tour.repository.UserRepository;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserRepository userDao;
+	private UserRepository userepRepository;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -24,11 +24,11 @@ public class UserServiceImpl implements UserService{
 	public Signup userRegistration(Signup reqDTO) {
 		//DTO --> entity
 		User user=mapper.map(reqDTO,User.class);
-		if(userDao.existsByEmail(reqDTO.getEmail()))
+		if(userepRepository.existsByEmail(reqDTO.getEmail()))
 			throw new ApiException("Email already exists !!!");
 		
 		user.setPassword(encoder.encode(user.getPassword()));
-		return mapper.map(userDao.save(user),Signup.class);
+		return mapper.map(userepRepository.save(user),Signup.class);
 	}
 	
 	

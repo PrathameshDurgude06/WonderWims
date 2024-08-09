@@ -26,5 +26,11 @@ public class ApiResponse {
 		this.timeStamp=LocalDateTime.now();
 	}
 	
+	public ApiResponse(String message) {
+		super();
+		this.message = message;
+		this.timeStamp=LocalDateTime.now();
+	}
+	
 }
 

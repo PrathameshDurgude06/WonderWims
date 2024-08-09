@@ -1,4 +1,4 @@
-package com.tour.custom_exception_handler;
+package com.tour.custom_exception;
 
 public class ApiException extends RuntimeException{
 	

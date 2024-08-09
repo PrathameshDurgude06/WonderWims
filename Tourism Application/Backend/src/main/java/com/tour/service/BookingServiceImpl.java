@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.tour.custom_exception_handler.ResourceNotFoundException;
+import com.tour.custom_exception.ResourceNotFoundException;
 import com.tour.dto.ApiResponse;
 import com.tour.dto.BookingDTO;
 import com.tour.entities.Booking;
