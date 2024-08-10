@@ -25,15 +25,17 @@ public class Signup {
 	private String email;
 	@JsonProperty(access = Access.WRITE_ONLY)// this property only used during de-ser.
 	private String password;
+	private String contactNo;
 	private Role role;
 	
 	public Signup(String firstName, String lastName,
-			String email, String password, Role role) {
+			String email, String password,String contactNo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.role = role;
+		this.contactNo=contactNo;
+		this.role = Role.CUSTOMER;
 	}
 }

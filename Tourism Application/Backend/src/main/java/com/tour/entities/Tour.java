@@ -1,6 +1,7 @@
 package com.tour.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -46,10 +47,10 @@ public class Tour extends BaseEntity{
 	@ElementCollection
 	@CollectionTable(name = "tour_dest", joinColumns = @JoinColumn(name="tour_id"))
 	@Column(name="dest_id")
-	private List<Destination> destinations;
+	private List<Destination> destinations=new ArrayList<>();
 
 //	@OneToMany
 //	@JoinColumn(name = "dest_id")
-//	private Destination destination;
+//	private Destination destination;	
 
 }
