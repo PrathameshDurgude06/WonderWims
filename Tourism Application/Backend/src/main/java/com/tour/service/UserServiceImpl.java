@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService{
 		return mapper.map(user, User.class);
 	}
 
+	
 	@Override
 	public List<User> getAllUsers() {
 		List<User> users = userRepository.findAll();

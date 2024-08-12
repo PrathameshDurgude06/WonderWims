@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import com.tour.security.JwtUtils;
 import com.tour.service.UserService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/users")
 public class UserSignInSignupController {
 
@@ -40,7 +43,7 @@ public class UserSignInSignupController {
 		 * 
 		 */
 		@PostMapping("/signup")
-		public ResponseEntity<?> userSignup(@RequestBody @Valid Signup dto) {
+		public ResponseEntity<?> userSignup(@RequestBody Signup dto) {
 			System.out.println("in sign up " + dto);
 			return ResponseEntity.status(HttpStatus.CREATED).body(userService.userRegistration(dto));
 		}
@@ -64,6 +67,11 @@ public class UserSignInSignupController {
 				//3. In case of successful auth,  create JWT n send it to the clnt in response
 			SigninResponse resp = new SigninResponse(jwtUtils.generateJwtToken(verifiedToken), "Successful Auth!!!!");
 			return ResponseEntity.status(HttpStatus.CREATED).body(resp);
+		}
+		
+		@GetMapping("/view")
+		public ResponseEntity<?> getAllUsers(){
+			return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
 		}
 
 	}

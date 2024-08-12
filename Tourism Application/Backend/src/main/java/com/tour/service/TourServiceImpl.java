@@ -54,4 +54,9 @@ public class TourServiceImpl implements TourService {
 		return "Not deleted";
 	}
 
+	@Override
+	public List<Tour> getAllTours() {
+		return tourRepository.findAll();
+	}
+
 }

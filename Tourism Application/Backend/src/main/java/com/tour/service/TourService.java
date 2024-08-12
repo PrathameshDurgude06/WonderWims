@@ -12,6 +12,8 @@ public interface TourService {
 	
 	List<Tour> getByName(String name);
 	
+	List<Tour> getAllTours();
+	
 	Tour getById(Long id);
 	
 	String deleteById(Long id);

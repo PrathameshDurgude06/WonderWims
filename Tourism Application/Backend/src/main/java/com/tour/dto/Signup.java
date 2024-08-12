@@ -29,13 +29,13 @@ public class Signup {
 	private Role role;
 	
 	public Signup(String firstName, String lastName,
-			String email, String password,String contactNo) {
+			String email, String password,String contactNo,Role role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.contactNo=contactNo;
-		this.role = Role.CUSTOMER;
+		this.role = role;
 	}
 }
