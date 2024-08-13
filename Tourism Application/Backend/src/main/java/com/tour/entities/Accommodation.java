@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -39,8 +37,4 @@ public class Accommodation {
     private LocalDate checkIn;
     
     private LocalDate checkOut;
-	
-    @OneToOne
-    @JoinColumn(name = "dest_id")
-    private Destination destination;
 }

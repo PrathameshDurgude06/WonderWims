@@ -45,7 +45,7 @@ public class SecurityConfig {
 		.antMatchers("/tours/view","/users/view","/users/signup","/users/signin",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
-		.antMatchers("/v1/**").hasRole("ADMIN")
+		.antMatchers("/v1/**").hasAuthority("ADMIN")
 		.antMatchers("/v2/**").hasAnyRole("ADMIN","CUSTOMER")
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.anyRequest().authenticated()

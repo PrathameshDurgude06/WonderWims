@@ -2,19 +2,18 @@ package com.tour.service;
 
 import java.util.List;
 
-import com.tour.entities.Tour;
+import com.tour.dto.ApiResponse;
+import com.tour.dto.TourDTO;
 
 public interface TourService {
 	
-	Tour addPackage(Tour tour);
+	ApiResponse addTour(TourDTO tourDTO);
 	
-	Tour editPackage(Long id,Tour tour);
-	
-	List<Tour> getByName(String name);
-	
-	List<Tour> getAllTours();
-	
-	Tour getById(Long id);
-	
-	String deleteById(Long id);
+    ApiResponse updateTour(Long tourId, TourDTO tourDTO);
+    
+    ApiResponse deleteTour(Long tourId);
+    
+    TourDTO getTourByTitle(String title);
+    
+    List<TourDTO> getAllTours();
 }

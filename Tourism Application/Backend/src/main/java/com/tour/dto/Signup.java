@@ -1,8 +1,11 @@
 package com.tour.dto;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.tour.entities.Role;
@@ -26,16 +29,22 @@ public class Signup {
 	@JsonProperty(access = Access.WRITE_ONLY)// this property only used during de-ser.
 	private String password;
 	private String contactNo;
-	private Role role;
+	
+	@JsonIgnore
+	@Enumerated(EnumType.STRING)
+	private Role role=Role.CUSTOMER;
+	
+//	@JsonIgnore
+//	@Enumerated(EnumType.STRING)
+//	private Role role=Role.ADMIN;
 	
 	public Signup(String firstName, String lastName,
-			String email, String password,String contactNo,Role role) {
+			String email, String password,String contactNo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.contactNo=contactNo;
-		this.role = role;
 	}
 }

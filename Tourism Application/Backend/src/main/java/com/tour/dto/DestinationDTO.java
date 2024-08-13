@@ -10,12 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DestinationDTO {
-	private Long destId;
-	
-	private String destName;
-	
-	private String state;
-	
-	private String description;
-	
+    
+    private Long destId;
+    private String destName;
+    private String state;
+    private String description;
+    
+    // Accommodation details
+    private AccommodationDTO accommodation;
 }

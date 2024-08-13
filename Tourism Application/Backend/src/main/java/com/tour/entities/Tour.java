@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -25,8 +25,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Tour extends BaseEntity{
-	
+public class Tour {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tour_id")
@@ -44,13 +44,7 @@ public class Tour extends BaseEntity{
 	
 	private double price;
 	
-	@ElementCollection
-	@CollectionTable(name = "tour_dest", joinColumns = @JoinColumn(name="tour_id"))
-	@Column(name="dest_id")
-	private List<Destination> destinations=new ArrayList<>();
-
-//	@OneToMany
-//	@JoinColumn(name = "dest_id")
-//	private Destination destination;	
-
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tour_id")  // this creates the foreign key in the Destination table
+	private List<Destination> destinations = new ArrayList<>();
 }

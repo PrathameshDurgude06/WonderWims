@@ -1,12 +1,14 @@
 package com.tour.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.tour.entities.Tour;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TourRepository extends JpaRepository<Tour, Long>{
+import java.util.Optional;
 
-	List<Tour> findAllByTitle(String name);
+@Repository
+public interface TourRepository extends JpaRepository<Tour, Long> {
+    
+    // Custom query method to find a tour by its title
+    Optional<Tour> findByTitle(String title);
 }

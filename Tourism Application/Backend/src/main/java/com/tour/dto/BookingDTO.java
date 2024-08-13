@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -35,11 +37,14 @@ public class BookingDTO {
 	
 	private LocalDate bookingDate;
 	
+	@Min(0)
 	private double totalCost;
 	
+	@NotNull
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long userId;
 	
+	@NotNull
 	@JsonProperty(access = Access.WRITE_ONLY)
     private Long tourId;
 }

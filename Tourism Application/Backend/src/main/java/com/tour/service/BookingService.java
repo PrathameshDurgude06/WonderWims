@@ -4,18 +4,21 @@ import java.util.List;
 
 import com.tour.dto.ApiResponse;
 import com.tour.dto.BookingDTO;
-import com.tour.entities.Booking;
 
 public interface BookingService {
 
-	ApiResponse addBooking (BookingDTO bookingDTO);
-	
-	Booking getBookingById(Long bookingId);
-	
-	List<BookingDTO> getAllBookings();
-	
-	ApiResponse updateBooking(Long bookingId, Booking booking);
-	
-	ApiResponse deleteBooking(Long bookingId);
-	
+    // Method to book a tour package
+    ApiResponse bookTourPackage(BookingDTO bookingDTO);
+
+    // Method for customers to get all their bookings
+    List<BookingDTO> getCustomerBookings(Long userId);
+
+    // Method for admins to get all bookings
+    List<BookingDTO> getAllBookings();
+
+    // Method to delete a specific booking by customer
+    ApiResponse deleteBookingByCustomer(Long bookingId, Long userId);
+
+    // Method to get a specific booking by its ID
+    BookingDTO getBookingById(Long bookingId);
 }
