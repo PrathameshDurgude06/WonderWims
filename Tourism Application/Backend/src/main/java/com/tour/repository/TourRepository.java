@@ -1,14 +1,22 @@
 package com.tour.repository;
 
-import com.tour.entities.Tour;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.tour.entities.Tour;
 
 @Repository
 public interface TourRepository extends JpaRepository<Tour, Long> {
     
-    // Custom query method to find a tour by its title
-    Optional<Tour> findByTitle(String title);
+	 // Custom query method to find tours by title
+    List<Tour> findByTitle(String title);
+    
+    boolean existsByTitleAndStartDate(String title, LocalDate startDate);
+    
+    Optional<Tour> findById(Long tourId);
+ 
 }

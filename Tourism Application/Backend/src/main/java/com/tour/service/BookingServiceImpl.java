@@ -1,5 +1,6 @@
 package com.tour.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,6 +77,10 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public ApiResponse deleteBookingByCustomer(Long bookingId, Long userId) {
+    	 if (!bookingRepository.existsById(bookingId)) {
+    	        throw new ResourceNotFoundException("Invalid Booking ID");
+    	 }
+    	 
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid Booking ID"));
 
@@ -85,5 +90,29 @@ public class BookingServiceImpl implements BookingService {
 
         bookingRepository.deleteById(bookingId);
         return new ApiResponse(HttpStatus.OK, "Booking deleted successfully");
+    }
+    
+    @Override
+    public List<BookingDTO> searchBookings(String status, LocalDate startDate) {
+        List<Booking> bookings = bookingRepository.findByStatusAndBookingDate(status, startDate);
+        return bookings.stream().map(booking -> mapper.map(booking, BookingDTO.class)).collect(Collectors.toList());
+    }
+    
+    @Override
+    public ApiResponse updateBooking(Long bookingId, BookingDTO bookingDTO) {
+    	if (!bookingRepository.existsById(bookingId)) {
+            throw new ResourceNotFoundException("Invalid Booking ID");
+        }
+    	
+        Booking existingBooking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Invalid Booking ID"));
+        
+        // Update fields as necessary
+        existingBooking.setStatus(bookingDTO.getStatus());
+        existingBooking.setBookingDate(bookingDTO.getBookingDate());
+        existingBooking.setTotalCost(bookingDTO.getTotalCost());
+        
+        bookingRepository.save(existingBooking);
+        return new ApiResponse(HttpStatus.OK, "Booking updated successfully");
     }
 }

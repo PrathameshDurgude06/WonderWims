@@ -1,5 +1,6 @@
 package com.tour.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.tour.dto.ApiResponse;
@@ -21,4 +22,10 @@ public interface BookingService {
 
     // Method to get a specific booking by its ID
     BookingDTO getBookingById(Long bookingId);
+    
+    //Method to get a bookings by status
+    List<BookingDTO> searchBookings(String status, LocalDate startDate);
+    
+    //Method to update a booking by its ID
+    ApiResponse updateBooking(Long bookingId, BookingDTO bookingDTO);
 }
