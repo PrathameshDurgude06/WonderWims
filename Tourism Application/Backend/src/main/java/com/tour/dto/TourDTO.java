@@ -22,6 +22,8 @@ public class TourDTO {
     
     private String description;
     
+    private String imageLink;
+    
     private String duration;
     
     private LocalDate startDate;

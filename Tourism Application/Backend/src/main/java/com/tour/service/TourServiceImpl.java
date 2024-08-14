@@ -151,7 +151,7 @@ import com.tour.repository.TourRepository;
 
                 // Map Tour entity to TourResponseDTO
                 TourResponseDTO tourResponseDTO = modelMapper.map(tour, TourResponseDTO.class);
-
+                
                 // Map the destinations and their accommodations to the response DTO
                 List<DestinationResponseDTO> destinationDTOs = tour.getDestinations().stream()
                         .map(destination -> {

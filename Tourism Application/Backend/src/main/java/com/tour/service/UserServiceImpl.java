@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService{
 	public Signup userRegistration(Signup reqDTO) {
 		//DTO --> entity
 		User user=mapper.map(reqDTO,User.class);
+		System.out.println(user+"************");
 		if(userRepository.existsByEmail(reqDTO.getEmail()))
 			throw new ApiException("Email already exists !!!");
 		

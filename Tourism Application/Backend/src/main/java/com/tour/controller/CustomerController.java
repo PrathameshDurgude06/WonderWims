@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +63,13 @@ public class CustomerController {
         ApiResponse response = bookingService.deleteBookingByCustomer(bookingId, userId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     } 
+    
+ // End point to update a booking by booking ID
+    @PutMapping("/bookings/{bookingId}")
+    public ResponseEntity<ApiResponse> updateBooking(@PathVariable Long bookingId, @Valid @RequestBody BookingDTO bookingDTO) {
+        ApiResponse response = bookingService.updateBooking(bookingId, bookingDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 	
     // End point to get all tour
     @GetMapping("/tours")

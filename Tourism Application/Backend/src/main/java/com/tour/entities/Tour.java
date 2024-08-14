@@ -37,6 +37,8 @@ public class Tour {
 	
 	private String description;
 	
+	private String image;
+	
 	private String duration;
 	
 	@Column(name = "start_date")
