@@ -1,6 +1,7 @@
 package com.tour.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +19,10 @@ public class TourResponseDTO {
 
     private String title;
     private String description;
+    private String imageLink;
     private String duration;
     private LocalDate startDate;
     private double price;
-    private List<DestinationResponseDTO> destinations;
+    private List<DestinationResponseDTO> destinations=new ArrayList<>();
+    
 }

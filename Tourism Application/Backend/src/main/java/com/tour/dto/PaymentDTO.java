@@ -27,7 +27,7 @@ public class PaymentDTO {
 	    
 	 private String status;
 	 
-	 @JsonProperty(access = Access.WRITE_ONLY)
+	// @JsonProperty(access = Access.WRITE_ONLY)
 	 private Long bookingId;
 
 

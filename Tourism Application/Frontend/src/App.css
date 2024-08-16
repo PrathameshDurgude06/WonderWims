@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  background-color: #f0f0f0;
+  /* Grey background color */
+  color: #333;
+  /* Set text color to dark grey */
+  padding: 20px;
+  /* Add padding for spacing */
+  border-bottom: 2px solid #ccc;
+  /* Add border bottom for separation */
+}
+
+.title {
+  font-size: 2.5rem;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: 3px solid #ccc;
+  /* Light grey border */
+  text-align: center;
+  /* Center the text */
+}
+
+.cards {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 400px;
+  height: max-content;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.image {
+  width: 380px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.ii {
+  width: 230px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.profileclass {
+  background-color: #068d8d;
+}
+
+.about{
+  text-align: center;
+  color: white;
+  
+}
+.tour-info {
+  margin: 20px 5px;
+}
+
+.tour-price {
+  color: #1faa59;
+  margin-top: 2px;
+  font-size: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tour-name {
+  font-size: 1.3rem;
+  text-align: center;
+}
+.card{
+  border-radius: 3px;
+  box-shadow: 4px 4px 4px 4px rgb(73, 65, 65);
+}
+.d-block{
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.read-more {
+  color: #12b0e8;
+  cursor: pointer;
+}
+
+.btn-red {
+  margin-top: 18px;
+  padding: 10px 80px;
+  border: 1px solid #b4161b;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #b4161b21;
+}
+
+.btn-disabled {
+  margin-top: 18px;
+  padding: 10px 80px;
+  border: 1px solid #b4161b;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.btn-red:hover {
+  background-color: red;
+  color: white;
+  transition: all 0.2s;
+}
+
+.refresh {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btn-white {
+  margin-top: 18px;
+  padding: 10px 80px;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.btn-white:hover {
+  background-color: white;
+  color: black;
+  transition: all 0.2s;
+}
+
+.filter-container {
+  width: 11/12;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: max-content;
+  gap: 4px;
+  margin: auto;
+  padding: 16px;
+  justify-content: center;
+}
+.description{
+  text-align: center;
+}
+.filter-option {
+  text-align: center;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: medium;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.active-select {
+  background-color: #1faa59;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #4caf50;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.inactive-select {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: #ddd;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #4caf50;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+  background-color: #107373;
+  color: white;
+  padding: 30px 20px;
+}
+
+.qr-img {
+  height: 150px;
+  margin-bottom: 8px;
+}
+
+.footer-text-l {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.qr-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-mid-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-icon {
+  font-size: 40px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.qr-code {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}

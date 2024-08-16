@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tour.custom_exception.ApiException;
+import com.tour.custom_exception.ResourceNotFoundException;
 import com.tour.dto.BookingDTO;
 import com.tour.dto.TourDTO;
+import com.tour.dto.TourResponseDTO;
 import com.tour.service.BookingService;
 import com.tour.service.TourService;
 
@@ -25,7 +28,7 @@ import com.tour.service.TourService;
 @RestController
 @ControllerAdvice
 @RequestMapping("/v1")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AdminController {
 	
 	@Autowired
@@ -42,6 +45,7 @@ public class AdminController {
 	
 	@PostMapping("/tours/add")
 	public ResponseEntity<?> createTour(@RequestBody TourDTO tour){
+		System.out.println("tour :- "+tour);
 		return ResponseEntity.status(HttpStatus.CREATED).body(tourService.addTour(tour));
 	}
 	
@@ -60,6 +64,33 @@ public class AdminController {
         List<BookingDTO> bookings = bookingService.getAllBookings();
         return new ResponseEntity<>(bookings, HttpStatus.OK);
     }
+	
+	@GetMapping("/tours/title/{title}")
+	public ResponseEntity<?> getTourByTitle(@PathVariable String title) {
+	    try {
+	        List<TourResponseDTO> tours = tourService.getTourByTitle(title);
+	        return ResponseEntity.ok(tours);
+	    } catch (ResourceNotFoundException e) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	    } catch (ApiException e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	    }
+	}
+	
+	@GetMapping("/tours/id/{tourId}")
+	public ResponseEntity<TourResponseDTO> getTourById(@PathVariable Long tourId) {
+	    try {
+	        TourResponseDTO tourResponseDTO = tourService.getTourById(tourId);
+
+		        return new ResponseEntity<>(tourResponseDTO, HttpStatus.OK);
+	    } catch (ResourceNotFoundException e) {
+	        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	    } catch (ApiException e) {
+	        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
+
+
 	
 
 }

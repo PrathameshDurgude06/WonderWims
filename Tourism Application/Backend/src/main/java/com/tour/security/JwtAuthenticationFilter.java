@@ -24,7 +24,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// check authorization header from incoming request
+//		var hn = request.getHeaderNames();
+//		var iter = request.getHeaderNames().asIterator();
+//		while(iter.hasNext()) {
+//			System.out.println(iter.next());
+//		}
+//		System.out.println(request);
 		String authHeader = request.getHeader("Authorization");
+		System.out.println(authHeader);
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
 			// => request header contains JWT , so extract it.
 			String jwt = authHeader.substring(7);

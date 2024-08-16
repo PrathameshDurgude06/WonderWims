@@ -15,7 +15,7 @@
 	<name>products_api5</name>
 	<description>Products API with spring security db based details user details with JWT based authentication n authorization n HTTPS</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

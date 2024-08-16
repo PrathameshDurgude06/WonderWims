@@ -41,10 +41,10 @@ public class BookingDTO {
 	private double totalCost;
 	
 	@NotNull
-	@JsonProperty(access = Access.WRITE_ONLY)
+//	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long userId;
 	
 	@NotNull
-	@JsonProperty(access = Access.WRITE_ONLY)
+//	@JsonProperty(access = Access.WRITE_ONLY)
     private Long tourId;
 }

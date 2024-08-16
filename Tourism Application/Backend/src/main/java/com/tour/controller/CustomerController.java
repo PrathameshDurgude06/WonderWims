@@ -28,7 +28,7 @@ import com.tour.service.TourService;
 @RestController
 @ControllerAdvice
 @RequestMapping("/v2")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CustomerController {
 	
 	@Autowired
@@ -44,15 +44,15 @@ public class CustomerController {
     }
 
     // End point to get booking details by booking ID
-    @GetMapping("/bookings/{bookingId}")
+    @GetMapping("/bookings/booking/{bookingId}")
     public ResponseEntity<BookingDTO> getBookingById(@PathVariable Long bookingId) {
         BookingDTO bookingDTO = bookingService.getBookingById(bookingId);
         return ResponseEntity.status(HttpStatus.OK).body(bookingDTO);
     }
 
     // End point to get all bookings for the logged-in customer
-    @GetMapping("/bookings")
-    public ResponseEntity<List<BookingDTO>> getCustomerBookings(@RequestParam Long userId) {
+    @GetMapping("/bookings/user/{userId}")
+    public ResponseEntity<List<BookingDTO>> getCustomerBookings(@PathVariable Long userId) {
         List<BookingDTO> bookings = bookingService.getCustomerBookings(userId);
         return ResponseEntity.status(HttpStatus.OK).body(bookings);
     }

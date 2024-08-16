@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,15 +35,15 @@ public class SecurityConfig {
 	public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception
 	{
 		//URL based authorization rules
-		http.cors()
-		.and()
+		http.cors(Customizer.withDefaults())
+		
 		//disable CSRF token generation n verification
 		.csrf().disable()
 		//configure exception handling for auth entry point - currently not required !
 //		.exceptionHandling().authenticationEntryPoint(authEntry)
 //		.and()
 		.authorizeRequests()
-		.antMatchers("/tours/view","/users/view","/users/signup","/users/signin",
+		.antMatchers("/v2/tours","/users/view","/users/signup","/users/signin",
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers("/v1/**").hasAuthority("ADMIN")

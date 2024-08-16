@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.tour.entities.Tour;
@@ -18,5 +19,8 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
     boolean existsByTitleAndStartDate(String title, LocalDate startDate);
     
     Optional<Tour> findById(Long tourId);
+    
+    @Query("SELECT t FROM Tour t LEFT JOIN FETCH t.destinations")
+    List<Tour> findAllWithDestinations();
  
 }

@@ -58,6 +58,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDTO getBookingById(Long bookingId) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid Booking ID"));
+        
         return mapper.map(booking, BookingDTO.class);
     }
 
@@ -107,8 +108,6 @@ public class BookingServiceImpl implements BookingService {
     	
         Booking existingBooking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Invalid Booking ID"));
-        
-        // Update fields as necessary
         existingBooking.setStatus(bookingDTO.getStatus());
         existingBooking.setBookingDate(bookingDTO.getBookingDate());
         existingBooking.setTotalCost(bookingDTO.getTotalCost());
