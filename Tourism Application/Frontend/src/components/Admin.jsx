@@ -88,7 +88,7 @@ const DestinationForm = ({ destination, onChange }) => {
 };
 
 function Admin() {
-    const [id, setID] = useState("");
+    const [tourId, setID] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState("");
@@ -113,24 +113,7 @@ function Admin() {
     //     getAllData();
     // }, []);
 
-    const handleDelete = async (tourId) => {
-        console.log(tourId);
-        const co = document.cookie.split('=')[1];
-        try {
-            const response = await axios.delete(`http://127.0.0.1:8443/v1/tours/${tourId}`, {
-                headers: {
-                    "Authorization": `Bearer ${co}`,
-                },
-            });
-            const result = await response.json();
-            const status=result.status;
-            if (status===200) {
-                getAllData();
-            }
-        } catch (error) {
-            console.error("Failed to delete tour:", error);
-        }
-    };
+    
 
     const handleById = async (tourId) => {
         const co = document.cookie.split('=')[1];
@@ -184,18 +167,19 @@ function Admin() {
 
     const handleCreateSubmit = async () => {
         const co = document.cookie.split('=')[1];
+        console.log("handlecreatesubmit :- ",co);
         try {
-            const response = await axios.post("http://127.0.0.1:8443/v1/tours/add", {
+            const response = await axios.post("http://127.0.0.1:8443/v1/tours/add",JSON.stringify({ title, description, duration, startDate, imageLink, price, destinations }), {
                 headers: {
-                    "Authorization": `Bearer ${co}`,
+                    Authorization: `Bearer ${co}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ title, description, duration, startDate, imageLink, price, destinations })
+              
             });
-            const result = await response.json();
+            const result = response.data;
             const status=result.status;
-            if (status===200) {
-                getAllData();
+            if (status===201) {
+                // getAllData();
                 resetForm();
             }
         } catch (error) {
@@ -331,10 +315,10 @@ function Admin() {
             <div className="mt-4">
                 {data.map(tour => (
                     <TourCard 
-                        key={tour.tourId} 
+                        key={tour.tourId}
                         tour={tour} 
-                        handleDelete={handleDelete} 
-                        handleUpdate={handleUpdate} 
+                        handleDelete={()=>handleDelete(tour.tourId)} 
+                        handleUpdate={()=>handleUpdate(tour.tourId)} 
                     />
                 ))}
             </div>

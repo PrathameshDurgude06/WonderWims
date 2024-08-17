@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +23,21 @@ import com.tour.dto.TourResponseDTO;
 import com.tour.entities.Accommodation;
 import com.tour.entities.Destination;
 import com.tour.entities.Tour;
+import com.tour.repository.AccommodationRepository;
+import com.tour.repository.DestinationRepository;
 import com.tour.repository.TourRepository;
 
     @Service
+    @Transactional
     public class TourServiceImpl implements TourService {
 
         @Autowired
         private TourRepository tourRepository;
+        @Autowired
+        private AccommodationRepository accommodationRepository;
+        
+        @Autowired
+        private DestinationRepository destinationRepository;
 
         @Autowired
         private ModelMapper modelMapper;
@@ -116,14 +127,37 @@ import com.tour.repository.TourRepository;
         }
 
         @Override
+        @Transactional
         public ApiResponse deleteTour(Long tourId) {
             try {
                 Tour existingTour = tourRepository.findById(tourId)
                         .orElseThrow(() -> new ResourceNotFoundException("Tour not found with ID: " + tourId));
-                tourRepository.delete(existingTour);
+                
+                // Check for constraints or references in other parts of the system
+                List<Long> accommodationIds = existingTour.getDestinations().stream()
+                        .map(destination -> destination.getAccommodation().getAccoId())
+                        .collect(Collectors.toList());
+                
+                List<Long> destinationIds = existingTour.getDestinations().stream()
+                        .map(Destination::getDestId)
+                        .collect(Collectors.toList());
+                
+                System.out.println("accommodationIds :- "+accommodationIds+" destinationIds:- "+destinationIds+" tourId:-"+tourId);
+                // Delete destinations next
+                destinationRepository.deleteDestinationsByIds(destinationIds);
+                
+                tourRepository.deleteTourById(tourId);
+                // Delete accommodations first
+                accommodationRepository.deleteAccommodationsByIds(accommodationIds);
+                
+                // Finally, delete the tour
+                
+
                 return new ApiResponse(HttpStatus.OK, "Tour package deleted successfully.");
             } catch (ResourceNotFoundException e) {
                 throw e;
+            } catch (ConstraintViolationException e) {
+                throw new ApiException("Error deleting tour package due to a constraint violation: " + e.getMessage());
             } catch (Exception e) {
                 throw new ApiException("Error deleting tour package: " + e.getMessage());
             }
@@ -140,6 +174,7 @@ import com.tour.repository.TourRepository;
                 for (Tour tour : tours) {
                     if (tour != null) {
                         TourResponseDTO tourDTO = new TourResponseDTO();
+                        tourDTO.setTourId(tour.getTourId());
                         tourDTO.setTitle(tour.getTitle());
                         tourDTO.setDescription(tour.getDescription());
                         tourDTO.setImageLink(tour.getImage());

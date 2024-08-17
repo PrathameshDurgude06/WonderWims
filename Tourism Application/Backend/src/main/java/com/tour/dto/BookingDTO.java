@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.tour.entities.Status;
@@ -30,10 +31,12 @@ import lombok.ToString;
 @ToString
 public class BookingDTO {
 	
+	
 	private Long bookingId;
 	
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	
 	
 	private LocalDate bookingDate;
 	
@@ -47,4 +50,6 @@ public class BookingDTO {
 	@NotNull
 //	@JsonProperty(access = Access.WRITE_ONLY)
     private Long tourId;
+	
+	
 }

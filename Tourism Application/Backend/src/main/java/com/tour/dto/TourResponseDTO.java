@@ -16,7 +16,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class TourResponseDTO {
-
+	private Long tourId;
     private String title;
     private String description;
     private String imageLink;

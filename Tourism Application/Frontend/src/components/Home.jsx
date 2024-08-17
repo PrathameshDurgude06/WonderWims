@@ -7,7 +7,7 @@ import { useAuth } from "../AuthContext";
 
 function Home() {
 
-  // const {fetchuserBookings} = useAuth();
+  const {getAllData} = useAuth();
   const [selectedState, setSelectedState] = useState("show all states");
   const [data,setData] = useState([])
   const [bookedData,setBookedData] = useState([]);
@@ -31,20 +31,14 @@ function Home() {
   };
 
 
-  const getAllData = async()=>{
-    console.log("getting all data")
-    const request =await fetch("http://127.0.0.1:8443/v2/tours",{
-      method:"GET"
-    });
-    const data =await request.json();
-    const d2 = data
-      console.log("d2",d2)
-    setData(d2??[])
-  }
+
+
+
+  
 
   useEffect(()=>{
     console.log("In use effect")
-    getAllData();
+    getAllData(setData);
     // fetchuserBookings(bookedData,setBookedData)
   },[])
   console.log({data})

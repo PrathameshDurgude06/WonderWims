@@ -4,7 +4,7 @@ import Card from "./Card";
 import { useAuth } from "../AuthContext";
 
 const Cardcontainer = ({ data }) => {
-  const { removeBooking, fetchuserBookings } = useAuth();
+  const { removeBooking, fetchuserBookings,handleDelete } = useAuth();
   const [bookedData, setBookedData] = useState([]);
   console.log("Card container ", { data });
   useEffect(() => {
@@ -20,7 +20,7 @@ const Cardcontainer = ({ data }) => {
                   // key={item[0].id}
                   // {...item[0]}
                   tour={item}
-                  removeBooking={removeBooking}
+                  handleDelete={handleDelete}
                   booked={true}
                 ></Card>
           // if (Array.isArray(item)) {

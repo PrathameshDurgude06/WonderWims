@@ -30,9 +30,13 @@ function SignupComponents() {
                 },
                 body: JSON.stringify({ firstName, lastName, email, password, contactNo }),
             });
-
             const r = await response.json();
+            const status=response.status;
+            if(status===201){
+                navigate("/signup")
+            }
             console.log("Sign-up response:", r);
+
 
             // Handle response here, e.g., show success message, clear form, etc.
         } catch (error) {

@@ -65,9 +65,8 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<BookingDTO> getCustomerBookings(Long userId) {
     	User u = this.userRepository.findById(userId).orElse(null);
-        return bookingRepository.findByUser(u).stream()
-                .map(booking -> mapper.map(booking, BookingDTO.class))
-                .collect(Collectors.toList());
+         return this.bookingRepository.findByUser(u).stream().map(booking-> new BookingDTO(booking.getBookingId(), booking.getStatus(), booking.getBookingDate(), booking.getTotalCost(),booking.getUser().getUserId(), booking.getTour().getTourId())).collect(Collectors.toList());
+   
     }
 
     @Override

@@ -47,7 +47,7 @@ public class Tour {
 	
 	private double price;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany( cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name = "tour_id")  // this creates the foreign key in the Destination table
 	private List<Destination> destinations = new ArrayList<>();
 }

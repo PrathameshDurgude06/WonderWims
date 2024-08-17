@@ -1,8 +1,36 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // TourCard Component
-function TourCard({ tour, handleDelete = () => {}, handleUpdate = () => {} }) {
+function TourCard({ tour, handleDelete, handleUpdate}) {
+    const navigate = useNavigate();
+
+    const handleBooking = async(tourId,tourPrice)=>{
+        const data = {
+            "status":"SUCCESS",
+            "bookingDate":new Date(),
+            "totalCost":tourPrice,
+            "userId":localStorage.getItem("userId"),
+            "tourId":tourId
+        }
+        console.table(data)
+        const co = document.cookie.split('=')[1];
+        const response  = await axios.post("http://localhost:8443/v2/bookings/book",data,{
+            headers: {
+                "Authorization": `Bearer ${co}`,
+                'Content-Type':"application/json"
+            }
+        });
+
+        const resData = response.data;
+        console.log(resData)
+        
+        navigate("/bookings")
+    }
+
+    console.table(tour)
     return (
         <div className="card mb-3" style={{ maxWidth: '700px' }}>
             <div 
@@ -25,7 +53,7 @@ function TourCard({ tour, handleDelete = () => {}, handleUpdate = () => {} }) {
                     ))}
                 </ul>
                 <div className="d-flex justify-content-between">
-                    <button 
+                    {localStorage.getItem("role")==='ADMIN'?(<><button 
                         className="btn btn-primary" 
                         onClick={() => handleUpdate(tour.tourId)}
                     >
@@ -36,7 +64,7 @@ function TourCard({ tour, handleDelete = () => {}, handleUpdate = () => {} }) {
                         onClick={() => handleDelete(tour.tourId)}
                     >
                         Delete
-                    </button>
+                    </button></>):(<><button onClick={()=>handleBooking(tour.tourId,tour?.price)} className='btn btn-success'>Book</button></>)}
                 </div>
             </div>
         </div>

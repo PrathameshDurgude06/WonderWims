@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tour.dto.ApiResponse;
 import com.tour.dto.BookingDTO;
 import com.tour.dto.TourResponseDTO;
+import com.tour.repository.BookingRepository;
 import com.tour.service.BookingService;
 import com.tour.service.TourService;
 
@@ -33,6 +34,8 @@ public class CustomerController {
 	
 	@Autowired
 	private BookingService bookingService;
+	@Autowired
+	private BookingRepository bookingRepository;
 	
 	@Autowired
 	private TourService tourService;
@@ -54,14 +57,18 @@ public class CustomerController {
     @GetMapping("/bookings/user/{userId}")
     public ResponseEntity<List<BookingDTO>> getCustomerBookings(@PathVariable Long userId) {
         List<BookingDTO> bookings = bookingService.getCustomerBookings(userId);
+        System.out.println("List<BookingDTO> bookings :- "+bookings);
         return ResponseEntity.status(HttpStatus.OK).body(bookings);
     }
 
     // End point to delete a booking by booking ID -->only for the customer who made the booking
     @DeleteMapping("/bookings/{bookingId}")
-    public ResponseEntity<ApiResponse> deleteBookingByCustomer(@PathVariable Long bookingId,@RequestParam Long userId) {
-        ApiResponse response = bookingService.deleteBookingByCustomer(bookingId, userId);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity deleteBookingByCustomer(@PathVariable Long bookingId) {
+         var b = bookingRepository.findById(bookingId).orElseThrow(()->new RuntimeException("Booking not found"));
+         if(b!=null) {
+        	 bookingRepository.deleteById(bookingId);
+         }
+        return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");
     } 
     
  // End point to update a booking by booking ID

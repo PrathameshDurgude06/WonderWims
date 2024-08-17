@@ -2,6 +2,7 @@ package com.tour.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,8 +47,8 @@ public class Booking {
 	@JoinColumn(name = "user_id",nullable =false )
 	private User user;
 	
-	@ManyToOne
-    @JoinColumn(name = "tour_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tour_id",nullable = true)
     private Tour tour;
 	
 }

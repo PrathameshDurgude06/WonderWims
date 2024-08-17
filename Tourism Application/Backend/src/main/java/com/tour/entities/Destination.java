@@ -27,7 +27,7 @@ public class Destination {
 
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "acco_id", referencedColumnName = "acco_id")
     private Accommodation accommodation;
 
